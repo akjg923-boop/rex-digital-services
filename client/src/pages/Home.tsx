@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - Clean */}
-      <section className="relative h-[40vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-hidden">
         {/* Simple Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
         </div>
