@@ -16,8 +16,8 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Simplified */}
-      <section className="relative pt-24 pb-12 overflow-hidden">
+      {/* Hero Section - Enhanced */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -25,15 +25,77 @@ export default function Home() {
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90"></div>
+          {/* Animated gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent animate-pulse"></div>
         </div>
 
-        {/* Minimal Content */}
+        {/* Content */}
         <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white py-8">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4">
-              خدمات إنتاج رقمي احترافية
-            </h1>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center md:text-right space-y-8">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 border border-primary/50 rounded-full backdrop-blur-sm">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-white text-sm font-medium">متاحون لتلبية طلباتكم</span>
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                نحول أفكارك
+                <span className="block mt-2 text-primary">إلى واقع رقمي مميز</span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto md:mx-0 leading-relaxed">
+                نقدم لك مجموعة متكاملة من الخدمات الرقمية الاحترافية لتحقيق أهدافك التسويقية والإبداعية
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                <a href="#services">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/60 transition-all"
+                  >
+                    استكشف خدماتنا
+                    <ArrowRight className="mr-2" size={20} />
+                  </Button>
+                </a>
+                <a href="#contact">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white text-lg px-8 py-6 backdrop-blur-sm"
+                  >
+                    تواصل معنا
+                  </Button>
+                </a>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto md:mx-0">
+                <div className="text-center md:text-right">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">500+</div>
+                  <div className="text-gray-400 text-sm">مشروع ناجح</div>
+                </div>
+                <div className="text-center md:text-right">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">300+</div>
+                  <div className="text-gray-400 text-sm">عميل راضٍ</div>
+                </div>
+                <div className="text-center md:text-right">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">5+</div>
+                  <div className="text-gray-400 text-sm">سنوات خبرة</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-3 bg-primary rounded-full"></div>
           </div>
         </div>
       </section>
