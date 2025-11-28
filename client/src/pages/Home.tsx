@@ -18,8 +18,14 @@ export default function Home() {
 
       {/* Hero Section - Clean */}
       <section className="relative h-[70vh] overflow-hidden">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/hero-banner.png" 
+            alt="Rex Banner" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
       </section>
 
