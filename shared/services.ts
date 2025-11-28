@@ -58,7 +58,7 @@ export const services: Service[] = [
     color: "from-orange-500 to-red-500",
   },
   {
-    id: "voiceover",
+    id: "voice-over",
     title: "التعليق الصوتي",
     description: "أصوات احترافية متنوعة للتعليق الصوتي على الفيديوهات والإعلانات والمحتوى التعليمي",
     icon: "Mic",
