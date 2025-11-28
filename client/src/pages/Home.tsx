@@ -16,8 +16,8 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+      {/* Hero Section - Simplified */}
+      <section className="relative pt-24 pb-12 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -25,120 +25,71 @@ export default function Home() {
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/70"></div>
+          <div className="absolute inset-0 bg-black/80"></div>
         </div>
 
-        {/* Content */}
+        {/* Minimal Content */}
         <div className="container relative z-10">
-          <div className="max-w-3xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              خدمات إنتاج رقمي
-              <span className="block mt-2 text-white">
-                احترافية
-              </span>
+          <div className="max-w-4xl mx-auto text-center text-white py-8">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4">
+              خدمات إنتاج رقمي احترافية
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-              نقدم لك مجموعة متكاملة من الخدمات الرقمية الاحترافية لتحقيق أهدافك التسويقية والإبداعية بأعلى جودة وأفضل النتائج
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8"
-              >
-                ابدأ معنا
-                <ArrowRight className="mr-2" size={20} />
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">500+</div>
-                <div className="text-gray-400 text-sm md:text-base">مشروع ناجح</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">300+</div>
-                <div className="text-gray-400 text-sm md:text-base">عميل راضٍ</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">5+</div>
-                <div className="text-gray-400 text-sm md:text-base">سنوات خبرة</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section - Clean Boxes */}
       <section id="services" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">خدماتنا</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              نقدم مجموعة شاملة من الخدمات الرقمية المتخصصة لتلبية جميع احتياجاتك الإبداعية والتسويقية
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {services.map((service) => {
               const IconComponent = Icons[service.icon as keyof typeof Icons] as any;
               
               return (
-                <Card
+                <Link
                   key={service.id}
-                  className="service-card-rex group hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  href={
+                    service.id === "models" ? "/models" :
+                    service.id === "content-creators" ? "/content-creators" :
+                    service.id === "video-production" ? "/video-production" :
+                    service.id === "voice-over" ? "/voice-artists" :
+                    service.id === "content-writing" ? "/content-writing" :
+                    "#contact"
+                  }
                 >
-                  {/* Service Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-60`}></div>
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-                      {IconComponent && <IconComponent className="text-purple-600" size={24} />}
-                    </div>
-                  </div>
+                  <Card className="service-card-rex group hover:shadow-2xl transition-all duration-300 h-full cursor-pointer hover:scale-105">
+                    <CardContent className="p-8 flex flex-col items-center text-center h-full">
+                      {/* Icon */}
+                      <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        {IconComponent && (
+                          <IconComponent className="w-10 h-10 text-primary" />
+                        )}
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {service.description}
+                      </p>
 
-                  <CardHeader>
-                    <CardTitle className="text-2xl">{service.title}</CardTitle>
-                    <CardDescription className="text-base leading-relaxed">
-                      {service.description}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <CheckCircle2 className="text-green-500 shrink-0 mt-0.5" size={18} />
-                          <span className="text-sm text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link href={
-                      service.id === "models" ? "/models" :
-                      service.id === "content-creators" ? "/content-creators" :
-                      service.id === "video-production" ? "/video-production" :
-                      service.id === "voice-over" ? "/voice-artists" :
-                      service.id === "content-writing" ? "/content-writing" :
-                      "#contact"
-                    }>
-                      <Button className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground">
-                        {
-                          service.id === "models" ? "تصفح المودلز" :
-                          service.id === "content-creators" ? "تصفح صناع المحتوى" :
-                          service.id === "video-production" ? "شاهد الأعمال" :
-                          service.id === "voice-over" ? "استمع للعينات" :
-                          service.id === "content-writing" ? "شاهد النماذج" :
-                          "اطلب الخدمة"
-                        }
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                      {/* Arrow Icon */}
+                      <div className="mt-auto pt-6">
+                        <div className="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary transition-all">
+                          <ArrowRight className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               );
             })}
           </div>
@@ -146,103 +97,142 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-card/50">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">لماذا تختارنا؟</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               نتميز بالجودة العالية والاحترافية في تقديم خدماتنا الرقمية
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "جودة عالية",
-                description: "نلتزم بأعلى معايير الجودة في جميع خدماتنا",
-                icon: "Award",
-              },
-              {
-                title: "فريق محترف",
-                description: "فريق من الخبراء والمحترفين في مجالاتهم",
-                icon: "Users",
-              },
-              {
-                title: "تسليم سريع",
-                description: "نلتزم بالمواعيد ونسلم المشاريع في الوقت المحدد",
-                icon: "Clock",
-              },
-              {
-                title: "أسعار تنافسية",
-                description: "أفضل الأسعار مقابل جودة الخدمات المقدمة",
-                icon: "DollarSign",
-              },
-            ].map((item, index) => {
-              const IconComponent = Icons[item.icon as keyof typeof Icons] as any;
-              
-              return (
-                <div
-                  key={index}
-                  className="text-center p-6 rounded-xl bg-background border border-border hover:shadow-lg transition-shadow"
-                >
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    {IconComponent && <IconComponent className="text-white" size={28} />}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm">{item.description}</p>
-                </div>
-              );
-            })}
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">جودة عالية</h3>
+              <p className="text-muted-foreground text-sm">
+                نلتزم بأعلى معايير الجودة في جميع خدماتنا
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Star className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">فريق محترف</h3>
+              <p className="text-muted-foreground text-sm">
+                فريق من الخبراء والمحترفين في مجالاتهم
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">تسليم سريع</h3>
+              <p className="text-muted-foreground text-sm">
+                نلتزم بالمواعيد ونسلم المشاريع في الوقت المحدد
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Star className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">أسعار تنافسية</h3>
+              <p className="text-muted-foreground text-sm">
+                أفضل الأسعار مقابل جودة الخدمات المقدمة
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-background">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="text-5xl font-bold text-primary mb-2">500+</div>
+              <div className="text-muted-foreground">مشروع ناجح</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-primary mb-2">300+</div>
+              <div className="text-muted-foreground">عميل راضٍ</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-primary mb-2">5+</div>
+              <div className="text-muted-foreground">سنوات خبرة</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-card/50">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">آراء عملائنا</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               نفخر بثقة عملائنا ورضاهم عن خدماتنا
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "أحمد محمد",
-                role: "مدير تسويق",
-                comment: "خدمة احترافية ممتازة، فريق العمل متعاون جداً والنتائج فاقت التوقعات",
-                rating: 5,
-              },
-              {
-                name: "سارة علي",
-                role: "صاحبة مشروع",
-                comment: "تعاملت معهم في عدة مشاريع، دائماً يقدمون الأفضل ويلتزمون بالمواعيد",
-                rating: 5,
-              },
-              {
-                name: "خالد عبدالله",
-                role: "مؤثر رقمي",
-                comment: "جودة الإنتاج عالية جداً، أنصح بالتعامل معهم لكل من يبحث عن الاحترافية",
-                rating: 5,
-              },
-            ].map((testimonial, index) => (
-              <Card key={index} className="border-2">
-                <CardHeader>
-                  <div className="flex items-center gap-1 mb-2">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="fill-yellow-400 text-yellow-400" size={18} />
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                  <CardDescription>{testimonial.role}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">"{testimonial.comment}"</p>
-                </CardContent>
-              </Card>
-            ))}
+            <Card className="border-2 border-border">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "خدمة احترافية ممتازة، فريق العمل متعاون جداً والنتائج فاقت التوقعات"
+                </p>
+                <div>
+                  <div className="font-bold">أحمد محمد</div>
+                  <div className="text-sm text-muted-foreground">مدير تسويق</div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-border">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "تعاملت معهم في عدة مشاريع، دائماً يقدمون الأفضل ويلتزمون بالمواعيد"
+                </p>
+                <div>
+                  <div className="font-bold">سارة علي</div>
+                  <div className="text-sm text-muted-foreground">صاحبة مشروع</div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-border">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "جودة الإنتاج عالية جداً، أنصح بالتعامل معهم لكل من يبحث عن الاحترافية"
+                </p>
+                <div>
+                  <div className="font-bold">خالد عبدالله</div>
+                  <div className="text-sm text-muted-foreground">مؤثر رقمي</div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -252,84 +242,92 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">تواصل معنا</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               نحن هنا لمساعدتك في تحقيق أهدافك. تواصل معنا الآن واحصل على استشارة مجانية
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
-            <ContactForm />
+            <div>
+              <Card className="border-2 border-border">
+                <CardHeader>
+                  <CardTitle className="text-2xl">اطلب خدمتك الآن</CardTitle>
+                  <CardDescription>
+                    املأ النموذج أدناه وسنتواصل معك في أقرب وقت ممكن
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ContactForm />
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Contact Info */}
             <div className="space-y-8">
-              <Card className="border-2">
-                <CardHeader>
-                  <CardTitle className="text-2xl">معلومات التواصل</CardTitle>
-                  <CardDescription>
-                    يمكنك التواصل معنا عبر القنوات التالية
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
-                      <Mail className="text-purple-600" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">البريد الإلكتروني</h3>
-                      <p className="text-muted-foreground">info@digitalservices.com</p>
-                    </div>
-                  </div>
+              <div>
+                <h3 className="text-2xl font-bold mb-6">معلومات التواصل</h3>
+                <p className="text-muted-foreground mb-6">
+                  يمكنك التواصل معنا عبر القنوات التالية
+                </p>
+              </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
-                      <Phone className="text-purple-600" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">رقم الهاتف</h3>
-                      <p className="text-muted-foreground">+966 50 123 4567</p>
-                    </div>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-primary" />
                   </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
-                      <MapPin className="text-purple-600" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">الموقع</h3>
-                      <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
-                    </div>
+                  <div>
+                    <h4 className="font-bold mb-1">البريد الإلكتروني</h4>
+                    <p className="text-muted-foreground">info@digitalservices.com</p>
                   </div>
+                </div>
 
-                  <div className="pt-4">
-                    <Button
-                      size="lg"
-                      className="w-full bg-green-500 hover:bg-green-600 text-white text-lg"
-                      onClick={() => window.open('https://wa.me/966501234567', '_blank')}
-                    >
-                      <MessageCircle className="ml-2" size={20} />
-                      تواصل عبر WhatsApp
-                    </Button>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-primary" />
                   </div>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h4 className="font-bold mb-1">رقم الهاتف</h4>
+                    <p className="text-muted-foreground" dir="ltr">+966 50 123 4567</p>
+                  </div>
+                </div>
 
-              {/* Working Hours */}
-              <Card className="border-2">
-                <CardHeader>
-                  <CardTitle className="text-xl">ساعات العمل</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">الموقع</h4>
+                    <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button 
+                    className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white"
+                    size="lg"
+                  >
+                    <MessageCircle className="ml-2" />
+                    تواصل عبر WhatsApp
+                  </Button>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-border">
+                <h4 className="font-bold mb-3">ساعات العمل</h4>
+                <div className="space-y-2 text-muted-foreground">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">الأحد - الخميس</span>
-                    <span className="font-semibold">9:00 ص - 6:00 م</span>
+                    <span>الأحد - الخميس</span>
+                    <span>9:00 ص - 6:00 م</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">الجمعة - السبت</span>
-                    <span className="font-semibold">مغلق</span>
+                    <span>الجمعة - السبت</span>
+                    <span>مغلق</span>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </div>
         </div>
