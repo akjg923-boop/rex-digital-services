@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Home } from "lucide-react";
+import { Home, Play } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -8,6 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
 
 // بيانات الفيديوهات من Vimeo
 const contentCreators = [
@@ -43,6 +47,7 @@ const contentCreators = [
 export default function ContentCreatorsPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedVideo, setSelectedVideo] = useState<typeof contentCreators[0] | null>(null);
 
   const filteredCreators = contentCreators.filter((creator) => {
     const platformMatch = selectedPlatform === "all" || creator.platform === selectedPlatform;
@@ -101,19 +106,26 @@ export default function ContentCreatorsPage() {
           {filteredCreators.map((creator) => (
             <div
               key={creator.id}
-              className="relative group"
+              className="relative group cursor-pointer"
               style={{ aspectRatio: "9/16" }}
+              onClick={() => setSelectedVideo(creator)}
             >
               {/* Vimeo iframe */}
               <div className="absolute inset-0 bg-zinc-900 rounded-lg overflow-hidden">
                 <iframe
                   src={`https://player.vimeo.com/video/${creator.vimeoId}&autoplay=1&loop=1&muted=1&background=1`}
-                  className="w-full h-full"
+                  className="w-full h-full pointer-events-none"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
                   title={creator.name}
                 />
+              </div>
+
+              {/* Play Icon Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30">
+                <div className="w-16 h-16 rounded-full bg-red-600/90 flex items-center justify-center">
+                  <Play className="w-8 h-8 text-white fill-white" />
+                </div>
               </div>
 
               {/* Info Overlay */}
@@ -138,6 +150,24 @@ export default function ContentCreatorsPage() {
           </div>
         )}
       </div>
+
+      {/* Fullscreen Video Dialog */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 bg-black border-0">
+          {selectedVideo && (
+            <div className="w-full h-[90vh] flex items-center justify-center">
+              <iframe
+                src={`https://player.vimeo.com/video/${selectedVideo.vimeoId}&autoplay=1`}
+                className="w-full h-full"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                title={selectedVideo.name}
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
