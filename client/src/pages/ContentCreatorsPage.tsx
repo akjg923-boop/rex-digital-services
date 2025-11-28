@@ -1,181 +1,190 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Filter, User, ExternalLink } from "lucide-react";
-import { trpc } from "@/lib/trpc";
-import type { ContentCreator } from "@/../../drizzle/schema";
+import { Link } from "wouter";
+import { Home, Play } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+// بيانات تجريبية للفيديوهات
+const contentCreators = [
+  {
+    id: 1,
+    name: "أحمد المبدع",
+    platform: "تيك توك",
+    category: "ترفيه",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "2.5M",
+    likes: "150K",
+  },
+  {
+    id: 2,
+    name: "سارة الإبداعية",
+    platform: "إنستغرام",
+    category: "موضة",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "1.8M",
+    likes: "95K",
+  },
+  {
+    id: 3,
+    name: "محمد التقني",
+    platform: "يوتيوب",
+    category: "تقنية",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "3.2M",
+    likes: "200K",
+  },
+  {
+    id: 4,
+    name: "فاطمة الطبخ",
+    platform: "تيك توك",
+    category: "طبخ",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "4.1M",
+    likes: "280K",
+  },
+  {
+    id: 5,
+    name: "خالد الرياضي",
+    platform: "إنستغرام",
+    category: "رياضة",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "1.5M",
+    likes: "85K",
+  },
+  {
+    id: 6,
+    name: "نورة التعليمية",
+    platform: "يوتيوب",
+    category: "تعليم",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+    thumbnail: "/content-creators.jpg",
+    views: "2.9M",
+    likes: "175K",
+  },
+];
 
 export default function ContentCreatorsPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("all");
-  const [selectedContentType, setSelectedContentType] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
 
-  const { data: creators, isLoading } = trpc.contentCreators.list.useQuery({
-    platform: selectedPlatform === "all" ? undefined : selectedPlatform,
-    contentType: selectedContentType === "all" ? undefined : selectedContentType,
+  const filteredCreators = contentCreators.filter((creator) => {
+    const platformMatch = selectedPlatform === "all" || creator.platform === selectedPlatform;
+    const categoryMatch = selectedCategory === "all" || creator.category === selectedCategory;
+    return platformMatch && categoryMatch;
   });
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-12 bg-gradient-to-br from-orange-600 via-orange-700 to-red-600 text-white">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">صناع المحتوى</h1>
-            <p className="text-lg text-orange-100">
-              فريق من صناع المحتوى المبدعين لإنشاء محتوى جذاب ومؤثر على مختلف منصات التواصل الاجتماعي
-            </p>
+    <div className="min-h-screen bg-black">
+      {/* Header */}
+      <header className="border-b border-white/10 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2 text-white hover:text-red-500 transition-colors">
+              <Home className="w-5 h-5" />
+              <span>العودة للرئيسية</span>
+            </Link>
+            <h1 className="text-2xl font-bold text-white">صناع المحتوى</h1>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-muted/30 sticky top-16 z-10 border-b">
-        <div className="container">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter size={20} />
-            <h2 className="text-lg font-semibold">تصفية النتائج</h2>
-          </div>
+      {/* Filters */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-wrap gap-4 justify-center mb-8">
+          <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
+            <SelectTrigger className="w-[200px] bg-zinc-900 border-zinc-800 text-white">
+              <SelectValue placeholder="كل المنصات" />
+            </SelectTrigger>
+            <SelectContent className="bg-zinc-900 border-zinc-800">
+              <SelectItem value="all" className="text-white">كل المنصات</SelectItem>
+              <SelectItem value="تيك توك" className="text-white">تيك توك</SelectItem>
+              <SelectItem value="إنستغرام" className="text-white">إنستغرام</SelectItem>
+              <SelectItem value="يوتيوب" className="text-white">يوتيوب</SelectItem>
+            </SelectContent>
+          </Select>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Platform Filter */}
-            <div>
-              <label className="text-sm font-medium mb-2 block">المنصة</label>
-              <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
-                <SelectTrigger>
-                  <SelectValue placeholder="اختر المنصة" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">الكل</SelectItem>
-                  <SelectItem value="instagram">Instagram</SelectItem>
-                  <SelectItem value="youtube">YouTube</SelectItem>
-                  <SelectItem value="tiktok">TikTok</SelectItem>
-                  <SelectItem value="snapchat">Snapchat</SelectItem>
-                  <SelectItem value="twitter">Twitter/X</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Content Type Filter */}
-            <div>
-              <label className="text-sm font-medium mb-2 block">نوع المحتوى</label>
-              <Select value={selectedContentType} onValueChange={setSelectedContentType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="اختر نوع المحتوى" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">الكل</SelectItem>
-                  <SelectItem value="video">فيديو</SelectItem>
-                  <SelectItem value="photo">صور</SelectItem>
-                  <SelectItem value="reels">Reels</SelectItem>
-                  <SelectItem value="stories">Stories</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-[200px] bg-zinc-900 border-zinc-800 text-white">
+              <SelectValue placeholder="كل الفئات" />
+            </SelectTrigger>
+            <SelectContent className="bg-zinc-900 border-zinc-800">
+              <SelectItem value="all" className="text-white">كل الفئات</SelectItem>
+              <SelectItem value="ترفيه" className="text-white">ترفيه</SelectItem>
+              <SelectItem value="موضة" className="text-white">موضة</SelectItem>
+              <SelectItem value="تقنية" className="text-white">تقنية</SelectItem>
+              <SelectItem value="طبخ" className="text-white">طبخ</SelectItem>
+              <SelectItem value="رياضة" className="text-white">رياضة</SelectItem>
+              <SelectItem value="تعليم" className="text-white">تعليم</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-      </section>
 
-      {/* Content Creators Grid */}
-      <section className="py-12">
-        <div className="container">
-          {isLoading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">جاري تحميل صناع المحتوى...</p>
-            </div>
-          ) : !creators || creators.length === 0 ? (
-            <div className="text-center py-12">
-              <User className="mx-auto text-muted-foreground mb-4" size={48} />
-              <h3 className="text-xl font-semibold mb-2">لا توجد نتائج</h3>
-              <p className="text-muted-foreground">
-                لم يتم العثور على صناع محتوى تطابق معايير البحث. جرب تغيير الفلاتر.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {creators.map((creator: ContentCreator) => (
-                <Card key={creator.id} className="overflow-hidden group hover:shadow-xl transition-all">
-                  {/* Creator Image */}
-                  <div className="relative h-64 bg-muted overflow-hidden">
-                    {creator.profileImage ? (
-                      <img
-                        src={creator.profileImage}
-                        alt={creator.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-red-100">
-                        <User size={64} className="text-orange-300" />
-                      </div>
-                    )}
+        {/* Videos Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+          {filteredCreators.map((creator) => (
+            <div
+              key={creator.id}
+              className="relative group cursor-pointer"
+              style={{ aspectRatio: "9/16" }}
+              onClick={() => setPlayingVideo(playingVideo === creator.id ? null : creator.id)}
+            >
+              {/* Video Container */}
+              <div className="absolute inset-0 bg-zinc-900 rounded-lg overflow-hidden">
+                {playingVideo === creator.id ? (
+                  <video
+                    src={creator.videoUrl}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full bg-cover bg-center"
+                    style={{ backgroundImage: `url(${creator.thumbnail})` }}
+                  >
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
+                      <Play className="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
+                    </div>
                   </div>
+                )}
+              </div>
 
-                  <CardHeader>
-                    <CardTitle className="text-xl">{creator.name}</CardTitle>
-                    {creator.bio && (
-                      <CardDescription className="line-clamp-2">{creator.bio}</CardDescription>
-                    )}
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    {/* Platforms */}
-                    {creator.platforms && (
-                      <div>
-                        <p className="text-sm font-medium mb-2">المنصات:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {JSON.parse(creator.platforms).map((platform: string, index: number) => (
-                            <Badge key={index} variant="outline">
-                              {platform}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Content Types */}
-                    {creator.contentTypes && (
-                      <div>
-                        <p className="text-sm font-medium mb-2">أنواع المحتوى:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {JSON.parse(creator.contentTypes).map((type: string, index: number) => (
-                            <Badge key={index} variant="secondary">
-                              {type}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Portfolio Link */}
-                    {creator.portfolioUrl && (
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                        onClick={() => window.open(creator.portfolioUrl || "", "_blank")}
-                      >
-                        <ExternalLink className="ml-2" size={16} />
-                        معرض الأعمال
-                      </Button>
-                    )}
-
-                    <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
-                      احجز الآن
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+              {/* Info Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                <h3 className="text-white font-bold text-lg mb-1">{creator.name}</h3>
+                <div className="flex items-center gap-2 text-sm text-gray-300 mb-2">
+                  <span className="bg-red-600/80 px-2 py-0.5 rounded text-xs">{creator.platform}</span>
+                  <span>{creator.category}</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-gray-400">
+                  <span>👁️ {creator.views}</span>
+                  <span>❤️ {creator.likes}</span>
+                </div>
+              </div>
             </div>
-          )}
+          ))}
         </div>
-      </section>
 
-      <Footer />
+        {filteredCreators.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-400 text-lg">لا توجد نتائج مطابقة للفلاتر المحددة</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
