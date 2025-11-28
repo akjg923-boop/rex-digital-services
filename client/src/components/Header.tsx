@@ -28,7 +28,7 @@ export default function Header() {
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer">
               <div className="px-4 py-2 border-2 border-primary rounded">
-                <span className="text-primary font-bold text-xl">DS</span>
+                <span className="text-primary font-bold text-xl">REX</span>
               </div>
             </div>
           </Link>
