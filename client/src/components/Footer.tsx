@@ -1,19 +1,19 @@
-import { Facebook, Instagram, Linkedin, Mail, Phone, Twitter } from "lucide-react";
+import { Link } from "wouter";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-muted/30 border-t border-border">
+    <footer className="bg-card border-t border-border">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Section */}
+          {/* Logo and Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                <span className="text-white font-bold text-xl">DS</span>
+              <div className="px-4 py-2 border-2 border-primary rounded">
+                <span className="text-primary font-bold text-xl">DS</span>
               </div>
-              <span className="font-bold text-lg">الخدمات الرقمية</span>
             </div>
             <p className="text-muted-foreground text-sm">
               نقدم لك أفضل الخدمات الرقمية الاحترافية لتحقيق أهدافك التسويقية والإبداعية
@@ -21,21 +21,26 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">روابط سريعة</h3>
+          <div>
+            <h3 className="font-bold text-lg mb-4 text-foreground">روابط سريعة</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
+                  الرئيسية
+                </Link>
+              </li>
+              <li>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">
                   خدماتنا
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
                   من نحن
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                <a href="#contact" className="text-muted-foreground hover:text-primary transition-colors">
                   تواصل معنا
                 </a>
               </li>
@@ -43,52 +48,88 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">خدماتنا</h3>
+          <div>
+            <h3 className="font-bold text-lg mb-4 text-foreground">خدماتنا</h3>
             <ul className="space-y-2">
-              <li className="text-muted-foreground text-sm">توفير المودل</li>
-              <li className="text-muted-foreground text-sm">صناع المحتوى</li>
-              <li className="text-muted-foreground text-sm">إنتاج الفيديو</li>
-              <li className="text-muted-foreground text-sm">التعليق الصوتي</li>
-              <li className="text-muted-foreground text-sm">كتابة المحتوى</li>
+              <li>
+                <Link href="/models" className="text-muted-foreground hover:text-primary transition-colors">
+                  توفير المودل
+                </Link>
+              </li>
+              <li>
+                <Link href="/content-creators" className="text-muted-foreground hover:text-primary transition-colors">
+                  صناع المحتوى
+                </Link>
+              </li>
+              <li>
+                <Link href="/video-production" className="text-muted-foreground hover:text-primary transition-colors">
+                  إنتاج الفيديو
+                </Link>
+              </li>
+              <li>
+                <Link href="/voice-artists" className="text-muted-foreground hover:text-primary transition-colors">
+                  التعليق الصوتي
+                </Link>
+              </li>
+              <li>
+                <Link href="/content-writing" className="text-muted-foreground hover:text-primary transition-colors">
+                  كتابة المحتوى
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">تواصل معنا</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Mail size={16} />
-                <span>info@digitalservices.com</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Phone size={16} />
-                <span>+966 50 123 4567</span>
-              </div>
-              <div className="flex items-center gap-4 pt-2">
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Facebook size={20} />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Instagram size={20} />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Twitter size={20} />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Linkedin size={20} />
-                </a>
-              </div>
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-bold text-lg mb-4 text-foreground">تواصل معنا</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-muted-foreground">
+                <Mail size={18} className="text-primary" />
+                <span className="text-sm">info@digitalservices.com</span>
+              </li>
+              <li className="flex items-center gap-2 text-muted-foreground">
+                <Phone size={18} className="text-primary" />
+                <span className="text-sm" dir="ltr">+966 55 123 4567</span>
+              </li>
+              <li className="flex items-center gap-2 text-muted-foreground">
+                <MapPin size={18} className="text-primary" />
+                <span className="text-sm">الرياض، المملكة العربية السعودية</span>
+              </li>
+            </ul>
+
+            {/* Social Media */}
+            <div className="flex items-center gap-4 mt-6">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Facebook size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Twitter size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram size={20} />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Linkedin size={20} />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground text-sm">
-            © {currentYear} الخدمات الرقمية. جميع الحقوق محفوظة.
-          </p>
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-muted-foreground text-sm">
+              © {currentYear} الخدمات الرقمية. جميع الحقوق محفوظة.
+            </p>
+            <div className="flex items-center gap-6 text-sm">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                سياسة الخصوصية
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                الشروط والأحكام
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

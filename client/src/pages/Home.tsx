@@ -25,35 +25,28 @@ export default function Home() {
             alt="Hero Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/95 via-purple-800/90 to-pink-900/95"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
 
         {/* Content */}
         <div className="container relative z-10">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              نحول أفكارك الإبداعية
-              <span className="block mt-2 bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
-                إلى واقع رقمي مميز
+              خدمات إنتاج رقمي
+              <span className="block mt-2 text-white">
+                احترافية
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-purple-100 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
               نقدم لك مجموعة متكاملة من الخدمات الرقمية الاحترافية لتحقيق أهدافك التسويقية والإبداعية بأعلى جودة وأفضل النتائج
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-white text-purple-900 hover:bg-purple-50 text-lg px-8"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8"
               >
-                استكشف خدماتنا
+                ابدأ معنا
                 <ArrowRight className="mr-2" size={20} />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 text-lg px-8"
-              >
-                تواصل معنا
               </Button>
             </div>
 
@@ -61,15 +54,15 @@ export default function Home() {
             <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
               <div>
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">500+</div>
-                <div className="text-purple-200 text-sm md:text-base">مشروع ناجح</div>
+                <div className="text-gray-400 text-sm md:text-base">مشروع ناجح</div>
               </div>
               <div>
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">300+</div>
-                <div className="text-purple-200 text-sm md:text-base">عميل راضٍ</div>
+                <div className="text-gray-400 text-sm md:text-base">عميل راضٍ</div>
               </div>
               <div>
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">5+</div>
-                <div className="text-purple-200 text-sm md:text-base">سنوات خبرة</div>
+                <div className="text-gray-400 text-sm md:text-base">سنوات خبرة</div>
               </div>
             </div>
           </div>
@@ -80,7 +73,8 @@ export default function Home() {
       <section id="services" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">خدماتنا الاحترافية</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">خدماتنا</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               نقدم مجموعة شاملة من الخدمات الرقمية المتخصصة لتلبية جميع احتياجاتك الإبداعية والتسويقية
             </p>
@@ -93,7 +87,7 @@ export default function Home() {
               return (
                 <Card
                   key={service.id}
-                  className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-2 hover:border-purple-200"
+                  className="service-card-rex group hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   {/* Service Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -132,7 +126,7 @@ export default function Home() {
                       service.id === "content-writing" ? "/content-writing" :
                       "#contact"
                     }>
-                      <Button className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                      <Button className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground">
                         {
                           service.id === "models" ? "تصفح المودلز" :
                           service.id === "content-creators" ? "تصفح صناع المحتوى" :

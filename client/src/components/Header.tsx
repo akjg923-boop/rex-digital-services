@@ -10,8 +10,8 @@ export default function Header() {
 
   const navLinks = [
     { href: "/", label: "الرئيسية" },
-    { href: "#services", label: "خدماتنا" },
-    { href: "#about", label: "من نحن" },
+    { href: "#services", label: "الخدمات" },
+    { href: "#about", label: "أعمالنا" },
     { href: "#contact", label: "تواصل معنا" },
   ];
 
@@ -21,16 +21,15 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <nav className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                <span className="text-white font-bold text-xl">DS</span>
+              <div className="px-4 py-2 border-2 border-primary rounded">
+                <span className="text-primary font-bold text-xl">DS</span>
               </div>
-              <span className="font-bold text-xl hidden sm:block">الخدمات الرقمية</span>
             </div>
           </Link>
 
@@ -40,7 +39,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 {link.label}
               </a>
@@ -49,8 +48,11 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-              ابدأ الآن
+            <Button 
+              variant="outline" 
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              ابدأ معنا
             </Button>
           </div>
 
@@ -72,14 +74,17 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-foreground/80 hover:text-foreground transition-colors font-medium py-2"
+                  className="text-foreground hover:text-primary transition-colors font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 w-full">
-                ابدأ الآن
+              <Button 
+                variant="outline" 
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full"
+              >
+                ابدأ معنا
               </Button>
             </div>
           </div>
