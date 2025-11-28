@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Home, Play } from "lucide-react";
+import { Home } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -9,74 +9,40 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// بيانات تجريبية للفيديوهات
+// بيانات الفيديوهات من Vimeo
 const contentCreators = [
   {
     id: 1,
-    name: "أحمد المبدع",
+    name: "فيديو 1",
     platform: "تيك توك",
     category: "ترفيه",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    thumbnail: "/content-creators.jpg",
+    vimeoId: "1140984385?h=e98363ac91",
     views: "2.5M",
     likes: "150K",
   },
   {
     id: 2,
-    name: "سارة الإبداعية",
+    name: "فيديو 2",
     platform: "إنستغرام",
     category: "موضة",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    thumbnail: "/content-creators.jpg",
+    vimeoId: "1140984229?h=0409b87f38",
     views: "1.8M",
     likes: "95K",
   },
   {
     id: 3,
-    name: "محمد التقني",
+    name: "فيديو 3",
     platform: "يوتيوب",
     category: "تقنية",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    thumbnail: "/content-creators.jpg",
+    vimeoId: "1140983546?h=2542d0143f",
     views: "3.2M",
     likes: "200K",
-  },
-  {
-    id: 4,
-    name: "فاطمة الطبخ",
-    platform: "تيك توك",
-    category: "طبخ",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    thumbnail: "/content-creators.jpg",
-    views: "4.1M",
-    likes: "280K",
-  },
-  {
-    id: 5,
-    name: "خالد الرياضي",
-    platform: "إنستغرام",
-    category: "رياضة",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    thumbnail: "/content-creators.jpg",
-    views: "1.5M",
-    likes: "85K",
-  },
-  {
-    id: 6,
-    name: "نورة التعليمية",
-    platform: "يوتيوب",
-    category: "تعليم",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-    thumbnail: "/content-creators.jpg",
-    views: "2.9M",
-    likes: "175K",
   },
 ];
 
 export default function ContentCreatorsPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
 
   const filteredCreators = contentCreators.filter((creator) => {
     const platformMatch = selectedPlatform === "all" || creator.platform === selectedPlatform;
@@ -135,36 +101,23 @@ export default function ContentCreatorsPage() {
           {filteredCreators.map((creator) => (
             <div
               key={creator.id}
-              className="relative group cursor-pointer"
+              className="relative group"
               style={{ aspectRatio: "9/16" }}
-              onClick={() => setPlayingVideo(playingVideo === creator.id ? null : creator.id)}
             >
-              {/* Video Container */}
+              {/* Vimeo iframe */}
               <div className="absolute inset-0 bg-zinc-900 rounded-lg overflow-hidden">
-                {playingVideo === creator.id ? (
-                  <video
-                    src={creator.videoUrl}
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full bg-cover bg-center"
-                    style={{ backgroundImage: `url(${creator.thumbnail})` }}
-                  >
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
-                      <Play className="w-16 h-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                  </div>
-                )}
+                <iframe
+                  src={`https://player.vimeo.com/video/${creator.vimeoId}&autoplay=1&loop=1&muted=1&background=1`}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title={creator.name}
+                />
               </div>
 
               {/* Info Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent pointer-events-none">
                 <h3 className="text-white font-bold text-lg mb-1">{creator.name}</h3>
                 <div className="flex items-center gap-2 text-sm text-gray-300 mb-2">
                   <span className="bg-red-600/80 px-2 py-0.5 rounded text-xs">{creator.platform}</span>
