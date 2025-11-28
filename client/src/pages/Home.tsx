@@ -1,12 +1,17 @@
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { services } from "@/../../shared/services";
-import { ArrowRight, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Star } from "lucide-react";
 import * as Icons from "lucide-react";
+import { Link } from "wouter";
 
 export default function Home() {
+  const { user, loading, error, isAuthenticated, logout } = useAuth();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -119,9 +124,25 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-                      اطلب الخدمة
-                    </Button>
+                    <Link href={
+                      service.id === "models" ? "/models" :
+                      service.id === "content-creators" ? "/content-creators" :
+                      service.id === "video-production" ? "/video-production" :
+                      service.id === "voice-over" ? "/voice-artists" :
+                      service.id === "content-writing" ? "/content-writing" :
+                      "#contact"
+                    }>
+                      <Button className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                        {
+                          service.id === "models" ? "تصفح المودلز" :
+                          service.id === "content-creators" ? "تصفح صناع المحتوى" :
+                          service.id === "video-production" ? "شاهد الأعمال" :
+                          service.id === "voice-over" ? "استمع للعينات" :
+                          service.id === "content-writing" ? "شاهد النماذج" :
+                          "اطلب الخدمة"
+                        }
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               );
@@ -232,27 +253,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 text-white">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">هل أنت مستعد للبدء؟</h2>
-          <p className="text-lg md:text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-            تواصل معنا الآن واحصل على استشارة مجانية لمشروعك القادم
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-white text-purple-900 hover:bg-purple-50 text-lg px-8"
-            >
-              تواصل معنا الآن
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 text-lg px-8"
-            >
-              اطلب عرض سعر
-            </Button>
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">تواصل معنا</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              نحن هنا لمساعدتك في تحقيق أهدافك. تواصل معنا الآن واحصل على استشارة مجانية
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Contact Form */}
+            <ContactForm />
+
+            {/* Contact Info */}
+            <div className="space-y-8">
+              <Card className="border-2">
+                <CardHeader>
+                  <CardTitle className="text-2xl">معلومات التواصل</CardTitle>
+                  <CardDescription>
+                    يمكنك التواصل معنا عبر القنوات التالية
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
+                      <Mail className="text-purple-600" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">البريد الإلكتروني</h3>
+                      <p className="text-muted-foreground">info@digitalservices.com</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
+                      <Phone className="text-purple-600" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">رقم الهاتف</h3>
+                      <p className="text-muted-foreground">+966 50 123 4567</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
+                      <MapPin className="text-purple-600" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">الموقع</h3>
+                      <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <Button
+                      size="lg"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white text-lg"
+                      onClick={() => window.open('https://wa.me/966501234567', '_blank')}
+                    >
+                      <MessageCircle className="ml-2" size={20} />
+                      تواصل عبر WhatsApp
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Working Hours */}
+              <Card className="border-2">
+                <CardHeader>
+                  <CardTitle className="text-xl">ساعات العمل</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">الأحد - الخميس</span>
+                    <span className="font-semibold">9:00 ص - 6:00 م</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">الجمعة - السبت</span>
+                    <span className="font-semibold">مغلق</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

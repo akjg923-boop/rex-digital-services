@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth();
 
   const navLinks = [
     { href: "/", label: "الرئيسية" },
@@ -12,6 +14,11 @@ export default function Header() {
     { href: "#about", label: "من نحن" },
     { href: "#contact", label: "تواصل معنا" },
   ];
+
+  // Add admin link if user is admin
+  if (isAuthenticated && user?.role === "admin") {
+    navLinks.push({ href: "/admin", label: "لوحة التحكم" });
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
