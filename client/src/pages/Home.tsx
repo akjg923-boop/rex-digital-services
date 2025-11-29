@@ -16,16 +16,51 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Clean */}
+      {/* Hero Section - Creative Design */}
       <section className="relative h-[70vh] overflow-hidden">
-        {/* Background Image */}
+        {/* Background with Diagonal Split */}
         <div className="absolute inset-0">
-          <img 
-            src="/hero-banner.png" 
-            alt="Rex Banner" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Gray Section (Right) */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300"></div>
+          
+          {/* Red Diagonal Section (Left) */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-red-600 via-red-500 to-red-700"
+            style={{
+              clipPath: 'polygon(0 0, 60% 0, 40% 100%, 0 100%)'
+            }}
+          ></div>
+          
+          {/* Background Image Overlay */}
+          <div className="absolute inset-0 opacity-20">
+            <img 
+              src="/hero-banner.png" 
+              alt="Rex Banner" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 container h-full flex items-center">
+          <div className="max-w-2xl">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl">
+              نحول أفكارك
+              <span className="block text-gray-900 mt-2">
+                إلى واقع إبداعي
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white mb-8 drop-shadow-lg">
+              نقدم لك خدمات رقمية احترافية لتحقيق أهدافك التسويقية
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-gray-900 hover:bg-gray-800 text-white text-lg px-8 py-6 shadow-2xl"
+            >
+              استكشف خدماتنا
+              <ArrowRight className="mr-2" size={24} />
+            </Button>
+          </div>
         </div>
       </section>
 
