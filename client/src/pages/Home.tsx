@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { services } from "@/../../shared/services";
-import { ArrowRight, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Star, Video, Mic, Users, FileText, Camera } from "lucide-react";
 import * as Icons from "lucide-react";
 import { Link } from "wouter";
 
@@ -16,55 +16,69 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Creative Design */}
-      <section className="relative h-[70vh] overflow-hidden">
-        {/* Background with Diagonal Split */}
-        <div className="absolute inset-0">
-          {/* Gray Section (Right) */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300"></div>
-          
-          {/* Red Diagonal Section (Left) */}
-          <div 
-            className="absolute inset-0 bg-gradient-to-br from-red-600 via-red-500 to-red-700"
-            style={{
-              clipPath: 'polygon(0 0, 60% 0, 40% 100%, 0 100%)'
-            }}
-          ></div>
-          
-          {/* Background Image Overlay */}
-          <div className="absolute inset-0 opacity-20">
-            <img 
-              src="/hero-banner.png" 
-              alt="Rex Banner" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10 container h-full flex items-center">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl">
-              نحول أفكارك
-              <span className="block text-gray-900 mt-2">
-                إلى واقع إبداعي
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white mb-8 drop-shadow-lg">
-              نقدم لك خدمات رقمية احترافية لتحقيق أهدافك التسويقية
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-gray-900 hover:bg-gray-800 text-white text-lg px-8 py-6 shadow-2xl"
-            >
-              استكشف خدماتنا
-              <ArrowRight className="mr-2" size={24} />
-            </Button>
+      {/* Hero Section - Tayseer Style */}
+      <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-br from-gray-600 via-gray-500 to-gray-600">
+        <div className="container relative z-10 h-full py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+            {/* Right Side - Text Content */}
+            <div className="text-right order-2 lg:order-1">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
+                تحويل...
+                <span className="block text-primary mt-2">
+                  يحقق حلمك
+                </span>
+              </h1>
+              
+              {/* White Illustrations - Service Icons */}
+              <div className="flex justify-end gap-8 mb-8 opacity-40">
+                <Video className="w-16 h-16 text-white" strokeWidth={1} />
+                <Mic className="w-16 h-16 text-white" strokeWidth={1} />
+                <Camera className="w-16 h-16 text-white" strokeWidth={1} />
+                <Users className="w-16 h-16 text-white" strokeWidth={1} />
+              </div>
+              
+              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+                قدم طلبك الآن...
+              </p>
+              
+              <p className="text-sm text-white/70 mb-8 leading-relaxed max-w-2xl mr-auto">
+                نحول نظام الموقع للموظفين الأفراد، العمر بشكل أقل 19 عام. هذه التمويل للسعوديين من 12 حتى 60 شهر. هذا الاشتراك رفع السعودية من 12 شهر إلى 60 شهر. مبلغ التمويل لغير السعوديين من 10 أشهر حتى 60 ألف ريال. مبلغ التمويل لغير السعوديين من 10 أشهر حتى 200 ألف ريال
+              </p>
+              
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-gray-900 font-bold text-lg px-12 py-6"
+              >
+                استكشف خدماتنا
+                <ArrowRight className="mr-2" size={24} />
+              </Button>
+            </div>
+            
+            {/* Left Side - Phone Mockup */}
+            <div className="relative order-1 lg:order-2">
+              <div className="relative w-full max-w-md mx-auto">
+                {/* Phone Frame */}
+                <div className="relative bg-gray-800 rounded-[3rem] p-4 shadow-2xl border-8 border-gray-700">
+                  <div className="bg-gray-900 rounded-[2.5rem] overflow-hidden aspect-[9/19]">
+                    <img 
+                      src="/hero-banner.png" 
+                      alt="Rex App" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                
+                {/* White Illustrations Behind */}
+                <div className="absolute -right-20 top-1/4 opacity-20">
+                  <FileText className="w-32 h-32 text-white" strokeWidth={0.5} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section - Clean Boxes */}
+      {/* Services Section */}
       <section id="services" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-16">
@@ -89,30 +103,24 @@ export default function Home() {
                   }
                 >
                   <Card className="service-card-rex group hover:shadow-2xl transition-all duration-300 h-full cursor-pointer hover:scale-105">
-                    <CardContent className="p-8 flex flex-col items-center text-center h-full">
-                      {/* Icon */}
-                      <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                        {IconComponent && (
-                          <IconComponent className="w-10 h-10 text-primary" />
-                        )}
+                    <CardHeader className="text-center pb-4">
+                      <div className="w-20 h-20 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        {IconComponent && <IconComponent className="text-primary" size={40} />}
                       </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                        {service.title}
-                      </h3>
-                      
-                      {/* Description */}
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
+                      <CardDescription className="text-base">
                         {service.description}
-                      </p>
-
-                      {/* Arrow Icon */}
-                      <div className="mt-auto pt-6">
-                        <div className="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary transition-all">
-                          <ArrowRight className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
-                        </div>
-                      </div>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {service.features.slice(0, 3).map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="text-primary shrink-0 mt-0.5" size={16} />
+                            <span className="text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </CardContent>
                   </Card>
                 </Link>
@@ -122,238 +130,70 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-card/50">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">لماذا تختارنا؟</h2>
-            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              نتميز بالجودة العالية والاحترافية في تقديم خدماتنا الرقمية
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">جودة عالية</h3>
-              <p className="text-muted-foreground text-sm">
-                نلتزم بأعلى معايير الجودة في جميع خدماتنا
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">فريق محترف</h3>
-              <p className="text-muted-foreground text-sm">
-                فريق من الخبراء والمحترفين في مجالاتهم
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">تسليم سريع</h3>
-              <p className="text-muted-foreground text-sm">
-                نلتزم بالمواعيد ونسلم المشاريع في الوقت المحدد
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">أسعار تنافسية</h3>
-              <p className="text-muted-foreground text-sm">
-                أفضل الأسعار مقابل جودة الخدمات المقدمة
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-5xl font-bold text-primary mb-2">500+</div>
-              <div className="text-muted-foreground">مشروع ناجح</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-primary mb-2">300+</div>
-              <div className="text-muted-foreground">عميل راضٍ</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-primary mb-2">5+</div>
-              <div className="text-muted-foreground">سنوات خبرة</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-card/50">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">آراء عملائنا</h2>
-            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              نفخر بثقة عملائنا ورضاهم عن خدماتنا
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-2 border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "خدمة احترافية ممتازة، فريق العمل متعاون جداً والنتائج فاقت التوقعات"
-                </p>
-                <div>
-                  <div className="font-bold">أحمد محمد</div>
-                  <div className="text-sm text-muted-foreground">مدير تسويق</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "تعاملت معهم في عدة مشاريع، دائماً يقدمون الأفضل ويلتزمون بالمواعيد"
-                </p>
-                <div>
-                  <div className="font-bold">سارة علي</div>
-                  <div className="text-sm text-muted-foreground">صاحبة مشروع</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "جودة الإنتاج عالية جداً، أنصح بالتعامل معهم لكل من يبحث عن الاحترافية"
-                </p>
-                <div>
-                  <div className="font-bold">خالد عبدالله</div>
-                  <div className="text-sm text-muted-foreground">مؤثر رقمي</div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">تواصل معنا</h2>
-            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               نحن هنا لمساعدتك في تحقيق أهدافك. تواصل معنا الآن واحصل على استشارة مجانية
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <div>
-              <Card className="border-2 border-border">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <ContactForm />
+
+            <div className="space-y-8">
+              <Card className="border-2">
                 <CardHeader>
-                  <CardTitle className="text-2xl">اطلب خدمتك الآن</CardTitle>
+                  <CardTitle className="text-2xl">معلومات التواصل</CardTitle>
                   <CardDescription>
-                    املأ النموذج أدناه وسنتواصل معك في أقرب وقت ممكن
+                    يمكنك التواصل معنا عبر القنوات التالية
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ContactForm />
+                <CardContent className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+                      <Mail className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">البريد الإلكتروني</h3>
+                      <p className="text-muted-foreground">info@rex.com</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+                      <Phone className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">رقم الهاتف</h3>
+                      <p className="text-muted-foreground">+966 50 123 4567</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+                      <MapPin className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">الموقع</h3>
+                      <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <Button
+                      size="lg"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white text-lg"
+                      onClick={() => window.open('https://wa.me/966501234567', '_blank')}
+                    >
+                      <MessageCircle className="ml-2" size={20} />
+                      تواصل عبر WhatsApp
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-6">معلومات التواصل</h3>
-                <p className="text-muted-foreground mb-6">
-                  يمكنك التواصل معنا عبر القنوات التالية
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">البريد الإلكتروني</h4>
-                    <p className="text-muted-foreground">info@digitalservices.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">رقم الهاتف</h4>
-                    <p className="text-muted-foreground" dir="ltr">+966 50 123 4567</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-1">الموقع</h4>
-                    <p className="text-muted-foreground">الرياض، المملكة العربية السعودية</p>
-                  </div>
-                </div>
-
-                <div className="pt-4">
-                  <Button 
-                    className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white"
-                    size="lg"
-                  >
-                    <MessageCircle className="ml-2" />
-                    تواصل عبر WhatsApp
-                  </Button>
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-border">
-                <h4 className="font-bold mb-3">ساعات العمل</h4>
-                <div className="space-y-2 text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>الأحد - الخميس</span>
-                    <span>9:00 ص - 6:00 م</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>الجمعة - السبت</span>
-                    <span>مغلق</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
