@@ -16,66 +16,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Tayseer Style */}
-      <section className="relative min-h-[80vh] overflow-hidden bg-gradient-to-br from-gray-600 via-gray-500 to-gray-600">
-        <div className="container relative z-10 h-full py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
-            {/* Right Side - Text Content */}
-            <div className="text-right order-2 lg:order-1">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                تحويل...
-                <span className="block text-primary mt-2">
-                  يحقق حلمك
-                </span>
-              </h1>
-              
-              {/* White Illustrations - Service Icons */}
-              <div className="flex justify-end gap-8 mb-8 opacity-40">
-                <Video className="w-16 h-16 text-white" strokeWidth={1} />
-                <Mic className="w-16 h-16 text-white" strokeWidth={1} />
-                <Camera className="w-16 h-16 text-white" strokeWidth={1} />
-                <Users className="w-16 h-16 text-white" strokeWidth={1} />
-              </div>
-              
-              <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-                قدم طلبك الآن...
-              </p>
-              
-              <p className="text-sm text-white/70 mb-8 leading-relaxed max-w-2xl mr-auto">
-                نحول نظام الموقع للموظفين الأفراد، العمر بشكل أقل 19 عام. هذه التمويل للسعوديين من 12 حتى 60 شهر. هذا الاشتراك رفع السعودية من 12 شهر إلى 60 شهر. مبلغ التمويل لغير السعوديين من 10 أشهر حتى 60 ألف ريال. مبلغ التمويل لغير السعوديين من 10 أشهر حتى 200 ألف ريال
-              </p>
-              
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-gray-900 font-bold text-lg px-12 py-6"
-              >
-                استكشف خدماتنا
-                <ArrowRight className="mr-2" size={24} />
-              </Button>
-            </div>
-            
-            {/* Left Side - Phone Mockup */}
-            <div className="relative order-1 lg:order-2">
-              <div className="relative w-full max-w-md mx-auto">
-                {/* Phone Frame */}
-                <div className="relative bg-gray-800 rounded-[3rem] p-4 shadow-2xl border-8 border-gray-700">
-                  <div className="bg-gray-900 rounded-[2.5rem] overflow-hidden aspect-[9/19]">
-                    <img 
-                      src="/hero-banner.png" 
-                      alt="Rex App" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                
-                {/* White Illustrations Behind */}
-                <div className="absolute -right-20 top-1/4 opacity-20">
-                  <FileText className="w-32 h-32 text-white" strokeWidth={0.5} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Hero Section - Full Image Banner */}
+      <section className="relative min-h-[80vh] overflow-hidden">
+        <img 
+          src="/hero-banner.png" 
+          alt="Rex Banner" 
+          className="w-full h-full object-cover absolute inset-0"
+        />
       </section>
 
       {/* Services Section */}
