@@ -16,13 +16,17 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Vertical Banner */}
-      <section className="relative overflow-hidden">
-        <img 
-          src="/hero-banner.png" 
-          alt="Rex Banner" 
-          className="w-full h-auto object-contain"
-        />
+      {/* Hero Section - Vertical Banner 9:16 */}
+      <section className="relative overflow-hidden bg-background">
+        <div className="container max-w-2xl mx-auto">
+          <div className="relative w-full" style={{ aspectRatio: '9/16' }}>
+            <img 
+              src="/hero-banner.png" 
+              alt="Rex Banner" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Services Section */}
