@@ -16,12 +16,12 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Full Image Banner */}
-      <section className="relative min-h-[80vh] overflow-hidden">
+      {/* Hero Section - Vertical Banner */}
+      <section className="relative overflow-hidden">
         <img 
           src="/hero-banner.png" 
           alt="Rex Banner" 
-          className="w-full h-full object-cover absolute inset-0"
+          className="w-full h-auto object-contain"
         />
       </section>
 
