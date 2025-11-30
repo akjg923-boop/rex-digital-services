@@ -16,15 +16,49 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Section - Vertical Banner 9:16 */}
-      <section className="relative overflow-hidden bg-background">
-        <div className="container max-w-2xl mx-auto">
-          <div className="relative w-full" style={{ aspectRatio: '9/16' }}>
+      {/* Hero Section - Horizontal Slider with 5 Images (9:16) */}
+      <section className="relative overflow-x-auto bg-background py-8">
+        <div className="flex gap-4 px-4">
+          {/* Image 1 */}
+          <div className="flex-shrink-0">
             <img 
-              src="/hero-banner.png" 
-              alt="Rex Banner" 
-              className="w-full h-full object-cover"
+              src="/banner-1.jpg" 
+              alt="يحقق حلمك" 
+              className="h-[600px] w-auto object-contain rounded-lg"
             />
+          </div>
+          
+          {/* Image 2 */}
+          <div className="flex-shrink-0">
+            <img 
+              src="/banner-2.jpg" 
+              alt="نصورك" 
+              className="h-[600px] w-auto object-contain rounded-lg"
+            />
+          </div>
+          
+          {/* Placeholder 3 */}
+          <div className="flex-shrink-0 w-[340px] h-[600px] bg-muted rounded-lg flex items-center justify-center">
+            <div className="text-center text-muted-foreground">
+              <Camera className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <p className="text-sm">صورة 3</p>
+            </div>
+          </div>
+          
+          {/* Placeholder 4 */}
+          <div className="flex-shrink-0 w-[340px] h-[600px] bg-muted rounded-lg flex items-center justify-center">
+            <div className="text-center text-muted-foreground">
+              <Camera className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <p className="text-sm">صورة 4</p>
+            </div>
+          </div>
+          
+          {/* Placeholder 5 */}
+          <div className="flex-shrink-0 w-[340px] h-[600px] bg-muted rounded-lg flex items-center justify-center">
+            <div className="text-center text-muted-foreground">
+              <Camera className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <p className="text-sm">صورة 5</p>
+            </div>
           </div>
         </div>
       </section>
