@@ -95,19 +95,13 @@ export default function Home() {
                     "#contact"
                   }
                 >
-                  <Card className="service-card-rex group hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 overflow-hidden h-full">
-                    {/* Image with gradient overlay */}
-                    <div className="relative h-48 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/40 z-10"></div>
-                      <div className="absolute inset-0 flex items-center justify-center z-20">
-                        <div className="text-center text-white">
-                          {IconComponent && <IconComponent className="mx-auto mb-2" size={48} />}
-                          <h3 className="text-2xl font-bold">{service.title}</h3>
-                        </div>
+                  <Card className="service-card-rex group hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 h-full">
+                    <CardHeader className="text-center pb-4">
+                      <div className="w-20 h-20 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        {IconComponent && <IconComponent className="text-primary" size={40} />}
                       </div>
-                    </div>
-                    <CardHeader className="pb-4">
-                      <CardDescription className="text-base text-center">
+                      <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
+                      <CardDescription className="text-base">
                         {service.description}
                       </CardDescription>
                     </CardHeader>
