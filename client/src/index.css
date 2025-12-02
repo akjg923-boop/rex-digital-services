@@ -44,7 +44,7 @@
 
 :root {
   /* REX Color Scheme - Gray + Orange (inspired by Tayseer) */
-  --primary: oklch(0.85 0.22 90); /* Bright Gold */
+  --primary: oklch(0.80 0.15 75); /* Bright Gold #FFBD59 */
   --primary-foreground: oklch(0.15 0 0); /* Dark gray */
   --sidebar-primary: oklch(0.85 0.22 90);
   --sidebar-primary-foreground: oklch(0.15 0 0);
@@ -98,7 +98,7 @@
 }
 
 .dark {
-  --primary: oklch(0.85 0.22 90);
+    --primary: oklch(0.80 0.15 75);
   --primary-foreground: oklch(0.15 0 0);
   --sidebar-primary: oklch(0.85 0.22 90);
   --sidebar-primary-foreground: oklch(0.15 0 0);
