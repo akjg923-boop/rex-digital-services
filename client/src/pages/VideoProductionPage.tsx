@@ -1,147 +1,185 @@
 import { useState } from "react";
+import { Link } from "wouter";
+import { Zap, Package, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Filter, Play, Video } from "lucide-react";
-import { trpc } from "@/lib/trpc";
-import type { VideoProduction } from "@/../../drizzle/schema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function VideoProductionPage() {
+  const [selectedCity, setSelectedCity] = useState<string>("all");
   const [selectedType, setSelectedType] = useState<string>("all");
-
-  const { data: videos, isLoading } = trpc.videoProductions.list.useQuery({
-    productionType: selectedType === "all" ? undefined : selectedType,
-  });
-
-  const formatDuration = (seconds: number | null) => {
-    if (!seconds) return "";
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="border-b border-border bg-background/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold">REX</h1>
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+            </div>
+            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              العودة للرئيسية
+            </Link>
+          </div>
+        </div>
+      </header>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 bg-background">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">إنتاج الفيديو</h1>
-            <p className="text-lg text-muted-foreground">
-              خدمات إنتاج فيديو احترافية من التخطيط والتصوير حتى المونتاج والإخراج النهائي
-            </p>
-          </div>
-        </div>
-      </section>
+      <section className="py-16 text-center">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            خدمات التصوير والإنتاج المرئي
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            اختر نوع التصوير المناسب لاحتياجاتك واحصل على خدمة احترافية متكاملة
+          </p>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-muted/30 sticky top-16 z-10 border-b">
-        <div className="container">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter size={20} />
-            <h2 className="text-lg font-semibold">تصفية النتائج</h2>
-          </div>
+          {/* Quick Service Button */}
+          <Button className="bg-card hover:bg-card/80 text-foreground border border-border mb-12">
+            <Zap className="w-5 h-5 ml-2" />
+            تفعيل الخدمة السريعة
+          </Button>
 
-          <div className="max-w-md">
-            <label className="text-sm font-medium mb-2 block">نوع الإنتاج</label>
-            <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger>
-                <SelectValue placeholder="اختر نوع الإنتاج" />
+          {/* Filters */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16">
+            <Select value={selectedCity} onValueChange={setSelectedCity}>
+              <SelectTrigger className="bg-card border-border h-14">
+                <SelectValue placeholder="جميع المدن" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">الكل</SelectItem>
-                <SelectItem value="commercial">إعلان تجاري</SelectItem>
-                <SelectItem value="promotional">فيديو ترويجي</SelectItem>
-                <SelectItem value="documentary">وثائقي</SelectItem>
-                <SelectItem value="corporate">فيديو مؤسسي</SelectItem>
-                <SelectItem value="event">تغطية فعاليات</SelectItem>
+                <SelectItem value="all">جميع المدن</SelectItem>
+                <SelectItem value="riyadh">الرياض</SelectItem>
+                <SelectItem value="jeddah">جدة</SelectItem>
+                <SelectItem value="makkah">مكة</SelectItem>
+                <SelectItem value="dammam">الدمام</SelectItem>
+                <SelectItem value="madinah">المدينة</SelectItem>
+                <SelectItem value="taif">الطائف</SelectItem>
+                <SelectItem value="abha">أبها</SelectItem>
+                <SelectItem value="tabuk">تبوك</SelectItem>
               </SelectContent>
             </Select>
+
+            <Select value={selectedType} onValueChange={setSelectedType}>
+              <SelectTrigger className="bg-card border-border h-14">
+                <SelectValue placeholder="جميع الأنواع" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">جميع الأنواع</SelectItem>
+                <SelectItem value="reel">فيديو ريلز</SelectItem>
+                <SelectItem value="commercial">فيديو إعلاني</SelectItem>
+                <SelectItem value="promo">فيديو بروموو</SelectItem>
+                <SelectItem value="event">تغطية فعاليات</SelectItem>
+                <SelectItem value="live">بث مباشر</SelectItem>
+                <SelectItem value="product">تصوير منتجات (فوتوغرافي)</SelectItem>
+                <SelectItem value="portrait">تصوير بورتريه</SelectItem>
+                <SelectItem value="architectural">تصوير معماري</SelectItem>
+                <SelectItem value="music">تصوير موسيقى</SelectItem>
+                <SelectItem value="documentary">فيديو وثائقي</SelectItem>
+                <SelectItem value="motion">موشن جرافيكس</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <div className="relative">
+              <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="w-full h-14 bg-card border border-border rounded-md px-10 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+          </div>
+
+          {/* Execution Method Title */}
+          <h3 className="text-3xl font-bold mb-8">اختر طريقة التنفيذ</h3>
+
+          {/* Service Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
+            {/* On-Location Service */}
+            <div className="bg-card border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
+              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="w-10 h-10 text-primary" />
+              </div>
+              <h4 className="text-2xl font-bold mb-4">خدمة التصوير في الموقع</h4>
+              <p className="text-muted-foreground mb-6">
+                فريق مجهز بكامل المعدات اللازمة يأتي إلى موقعك
+              </p>
+              <ul className="text-right space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>فريق متكامل مع المعدات</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>تصوير في موقعك الخاص</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>مرونة في التصوير</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>نتائج احترافية فورية</span>
+                </li>
+              </ul>
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12">
+                اختر هذه الخدمة →
+              </Button>
+            </div>
+
+            {/* Pickup & Shoot Service */}
+            <div className="bg-card border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
+              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Package className="w-10 h-10 text-primary" />
+              </div>
+              <h4 className="text-2xl font-bold mb-4">خدمة الاستلام والتصوير</h4>
+              <p className="text-muted-foreground mb-6">
+                نرسل المندوب يستلم المنتجات ونرجعها لك بعد التصوير
+              </p>
+              <ul className="text-right space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>استلام المنتجات من موقعك</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>تصوير احترافي في الاستوديو</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>إرجاع المنتجات بعد التصوير</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                  <span>توفير الوقت والجهد</span>
+                </li>
+              </ul>
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12">
+                اختر هذه الخدمة →
+              </Button>
+            </div>
+          </div>
+
+          {/* Consultation Section */}
+          <div className="bg-card border border-border rounded-lg p-12 max-w-3xl mx-auto">
+            <h3 className="text-3xl font-bold mb-4">هل تحتاج إلى استشارة؟</h3>
+            <p className="text-xl text-muted-foreground mb-8">
+              فريقنا جاهز لمساعدتك في اختيار الخيار الأنسب لاحتياجاتك
+            </p>
+            <Button className="bg-card-foreground hover:bg-card-foreground/90 text-card font-bold h-14 px-8">
+              تواصل معنا الآن
+            </Button>
           </div>
         </div>
       </section>
-
-      {/* Videos Grid */}
-      <section className="py-12">
-        <div className="container">
-          {isLoading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">جاري تحميل الأعمال...</p>
-            </div>
-          ) : !videos || videos.length === 0 ? (
-            <div className="text-center py-12">
-              <Video className="mx-auto text-muted-foreground mb-4" size={48} />
-              <h3 className="text-xl font-semibold mb-2">لا توجد نتائج</h3>
-              <p className="text-muted-foreground">
-                لم يتم العثور على أعمال تطابق معايير البحث. جرب تغيير الفلاتر.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {videos.map((video: VideoProduction) => (
-                <Card key={video.id} className="overflow-hidden group hover:shadow-xl transition-all">
-                  {/* Video Thumbnail */}
-                  <div className="relative h-56 bg-muted overflow-hidden">
-                    {video.thumbnailUrl ? (
-                      <div className="relative w-full h-full">
-                        <img
-                          src={video.thumbnailUrl}
-                          alt={video.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                            <Play className="text-primary" size={28} />
-                          </div>
-                        </div>
-                        {video.duration && (
-                          <div className="absolute bottom-2 left-2 bg-black/80 text-white px-2 py-1 rounded text-sm">
-                            {formatDuration(video.duration)}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-muted">
-                        <Video size={64} className="text-muted-foreground" />
-                      </div>
-                    )}
-                  </div>
-
-                  <CardHeader>
-                    <CardTitle className="text-xl">{video.title}</CardTitle>
-                    {video.description && (
-                      <CardDescription className="line-clamp-2">{video.description}</CardDescription>
-                    )}
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm">
-                      {video.productionType && (
-                        <Badge variant="secondary">{video.productionType}</Badge>
-                      )}
-                      {video.clientName && (
-                        <span className="text-muted-foreground">{video.clientName}</span>
-                      )}
-                    </div>
-
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                      شاهد الفيديو
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <Footer />
     </div>
   );
 }
