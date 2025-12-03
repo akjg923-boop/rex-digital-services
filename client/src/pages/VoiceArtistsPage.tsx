@@ -152,10 +152,10 @@ export default function VoiceArtistsPage() {
                   </div>
 
                   {/* Custom Audio Player */}
-                  <div className="bg-[#4a2c2c] rounded-lg p-4 mb-6">
+                  <div className="bg-primary/10 rounded-lg p-4 mb-6">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[#8b4545] flex items-center justify-center flex-shrink-0">
-                        <Volume2 className="w-6 h-6 text-white" />
+                      <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                        <Volume2 className="w-6 h-6 text-primary" />
                       </div>
                       <div className="flex-1">
                         <audio 
