@@ -174,7 +174,7 @@ export default function VoiceArtistsPage() {
                   {/* Request Button */}
                   <Button
                     onClick={() => handleRequestNow(artist.name)}
-                    className="w-full bg-[#8b4545] hover:bg-[#a05252] text-white py-6 text-lg rounded-lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-lg rounded-lg"
                   >
                     اطلب الآن
                   </Button>

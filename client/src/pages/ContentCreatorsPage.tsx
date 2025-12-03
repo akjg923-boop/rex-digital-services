@@ -56,16 +56,16 @@ export default function ContentCreatorsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-white/10 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-border bg-background/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 text-white hover:text-red-500 transition-colors">
+            <Link href="/" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
               <Home className="w-5 h-5" />
               <span>العودة للرئيسية</span>
             </Link>
-            <h1 className="text-2xl font-bold text-white">صناع المحتوى</h1>
+            <h1 className="text-2xl font-bold text-foreground">صناع المحتوى</h1>
           </div>
         </div>
       </header>
@@ -74,29 +74,29 @@ export default function ContentCreatorsPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap gap-4 justify-center mb-8">
           <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
-            <SelectTrigger className="w-[200px] bg-zinc-900 border-zinc-800 text-white">
+            <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="كل المنصات" />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-900 border-zinc-800">
-              <SelectItem value="all" className="text-white">كل المنصات</SelectItem>
-              <SelectItem value="تيك توك" className="text-white">تيك توك</SelectItem>
-              <SelectItem value="إنستغرام" className="text-white">إنستغرام</SelectItem>
-              <SelectItem value="يوتيوب" className="text-white">يوتيوب</SelectItem>
+            <SelectContent>
+              <SelectItem value="all">كل المنصات</SelectItem>
+              <SelectItem value="تيك توك">تيك توك</SelectItem>
+              <SelectItem value="إنستغرام">إنستغرام</SelectItem>
+              <SelectItem value="يوتيوب">يوتيوب</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-[200px] bg-zinc-900 border-zinc-800 text-white">
+            <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="كل الفئات" />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-900 border-zinc-800">
-              <SelectItem value="all" className="text-white">كل الفئات</SelectItem>
-              <SelectItem value="ترفيه" className="text-white">ترفيه</SelectItem>
-              <SelectItem value="موضة" className="text-white">موضة</SelectItem>
-              <SelectItem value="تقنية" className="text-white">تقنية</SelectItem>
-              <SelectItem value="طبخ" className="text-white">طبخ</SelectItem>
-              <SelectItem value="رياضة" className="text-white">رياضة</SelectItem>
-              <SelectItem value="تعليم" className="text-white">تعليم</SelectItem>
+            <SelectContent>
+              <SelectItem value="all">كل الفئات</SelectItem>
+              <SelectItem value="ترفيه">ترفيه</SelectItem>
+              <SelectItem value="موضة">موضة</SelectItem>
+              <SelectItem value="تقنية">تقنية</SelectItem>
+              <SelectItem value="طبخ">طبخ</SelectItem>
+              <SelectItem value="رياضة">رياضة</SelectItem>
+              <SelectItem value="تعليم">تعليم</SelectItem>
             </SelectContent>
           </Select>
         </div>
