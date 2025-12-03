@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - Horizontal Slider with 5 Images (9:16) */}
-      <section className="relative overflow-x-auto bg-background py-8">
+      <section className="relative overflow-x-auto bg-background py-8 pt-24">
         <div className="flex gap-4 px-4">
           {/* Image 1 */}
           <div className="flex-shrink-0">
