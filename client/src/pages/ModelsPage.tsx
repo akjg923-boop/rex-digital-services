@@ -28,11 +28,11 @@ export default function ModelsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 text-white">
+      <section className="relative pt-24 pb-12 bg-background">
         <div className="container">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">توفير المودل</h1>
-            <p className="text-lg text-purple-100">
+            <p className="text-lg text-muted-foreground">
               نوفر لك أفضل المودلز المحترفين لمشاريعك التجارية والإعلانية بمختلف الأعمار والأنماط
             </p>
           </div>
@@ -143,8 +143,8 @@ export default function ModelsPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-100 to-pink-100">
-                        <User size={64} className="text-purple-300" />
+                      <div className="w-full h-full flex items-center justify-center bg-muted">
+                        <User size={64} className="text-muted-foreground" />
                       </div>
                     )}
                   </div>
@@ -178,7 +178,7 @@ export default function ModelsPage() {
                       </div>
                     )}
 
-                    <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                       احجز الآن
                     </Button>
                   </CardContent>

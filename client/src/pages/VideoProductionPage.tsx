@@ -97,7 +97,7 @@ export default function VideoProductionPage() {
                         />
                         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                           <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                            <Play className="text-blue-600" size={28} />
+                            <Play className="text-primary" size={28} />
                           </div>
                         </div>
                         {video.duration && (
@@ -108,7 +108,7 @@ export default function VideoProductionPage() {
                       </div>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-muted">
-                        <Video size={64} className="text-blue-300" />
+                        <Video size={64} className="text-muted-foreground" />
                       </div>
                     )}
                   </div>
