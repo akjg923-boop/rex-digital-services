@@ -178,7 +178,7 @@ export default function Home() {
                   <div className="pt-4">
                     <Button
                       size="lg"
-                      className="w-full bg-green-500 hover:bg-green-600 text-white text-lg"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg"
                       onClick={() => window.open('https://wa.me/966501234567', '_blank')}
                     >
                       <MessageCircle className="ml-2" size={20} />

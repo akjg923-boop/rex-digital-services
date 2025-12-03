@@ -28,11 +28,11 @@ export default function VideoProductionPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-600 text-white">
+      <section className="relative pt-24 pb-12 bg-background">
         <div className="container">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">إنتاج الفيديو</h1>
-            <p className="text-lg text-blue-100">
+            <p className="text-lg text-muted-foreground">
               خدمات إنتاج فيديو احترافية من التخطيط والتصوير حتى المونتاج والإخراج النهائي
             </p>
           </div>
@@ -107,7 +107,7 @@ export default function VideoProductionPage() {
                         )}
                       </div>
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-100">
+                      <div className="w-full h-full flex items-center justify-center bg-muted">
                         <Video size={64} className="text-blue-300" />
                       </div>
                     )}
@@ -130,7 +130,7 @@ export default function VideoProductionPage() {
                       )}
                     </div>
 
-                    <Button className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                       شاهد الفيديو
                     </Button>
                   </CardContent>
