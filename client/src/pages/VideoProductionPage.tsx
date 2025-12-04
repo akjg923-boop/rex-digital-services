@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { Zap, Package, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,21 @@ export default function VideoProductionPage() {
   const [selectedCity, setSelectedCity] = useState<string>("all");
   const [selectedType, setSelectedType] = useState<string>("all");
   const [selectedDate, setSelectedDate] = useState<string>("");
+
+  // الخدمات التي تتطلب حضور في الموقع فقط (لا تدعم الاستلام والتصوير)
+  const onLocationOnlyServices = useMemo(() => [
+    "event",        // تغطية فعاليات
+    "live",         // بث مباشر
+    "portrait",     // تصوير بورتريه
+    "architectural",// تصوير معماري
+    "music",        // تصوير موسيقى
+  ], []);
+
+  // تحديد ما إذا كان يجب إظهار خيار "الاستلام والتصوير"
+  const showPickupOption = useMemo(() => {
+    if (selectedType === "all") return true;
+    return !onLocationOnlyServices.includes(selectedType);
+  }, [selectedType, onLocationOnlyServices]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -102,7 +117,7 @@ export default function VideoProductionPage() {
           <h3 className="text-3xl font-bold mb-8">اختر طريقة التنفيذ</h3>
 
           {/* Service Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
+          <div className={`grid grid-cols-1 ${showPickupOption ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-6 max-w-5xl mx-auto mb-16`}>
             {/* On-Location Service */}
             <div className="bg-card border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -135,37 +150,39 @@ export default function VideoProductionPage() {
               </Button>
             </div>
 
-            {/* Pickup & Shoot Service */}
-            <div className="bg-card border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
-              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Package className="w-10 h-10 text-primary" />
+            {/* Pickup & Shoot Service - يظهر فقط للخدمات المناسبة */}
+            {showPickupOption && (
+              <div className="bg-card border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Package className="w-10 h-10 text-primary" />
+                </div>
+                <h4 className="text-2xl font-bold mb-4">خدمة الاستلام والتصوير</h4>
+                <p className="text-muted-foreground mb-6">
+                  نرسل المندوب يستلم المنتجات ونرجعها لك بعد التصوير
+                </p>
+                <ul className="text-right space-y-3 mb-8">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>استلام المنتجات من موقعك</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>تصوير احترافي في الاستوديو</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>إرجاع المنتجات بعد التصوير</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>توفير الوقت والجهد</span>
+                  </li>
+                </ul>
+                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12">
+                  اختر هذه الخدمة →
+                </Button>
               </div>
-              <h4 className="text-2xl font-bold mb-4">خدمة الاستلام والتصوير</h4>
-              <p className="text-muted-foreground mb-6">
-                نرسل المندوب يستلم المنتجات ونرجعها لك بعد التصوير
-              </p>
-              <ul className="text-right space-y-3 mb-8">
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                  <span>استلام المنتجات من موقعك</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                  <span>تصوير احترافي في الاستوديو</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                  <span>إرجاع المنتجات بعد التصوير</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                  <span>توفير الوقت والجهد</span>
-                </li>
-              </ul>
-              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12">
-                اختر هذه الخدمة →
-              </Button>
-            </div>
+            )}
           </div>
 
           {/* Consultation Section */}
