@@ -85,6 +85,20 @@ export const services: Service[] = [
     ],
     color: "from-indigo-500 to-purple-500",
   },
+  {
+    id: "editing-montage",
+    title: "المونتاج والتحرير",
+    description: "خدمات مونتاج وتحرير احترافية للفيديوهات، تشمل القص، التجميع، إضافة المؤثرات، وتصحيح الألوان.",
+    icon: "Film",
+    image: "/editing-montage.jpg",
+    features: [
+      "قص وتجميع احترافي",
+      "إضافة مؤثرات بصرية وصوتية",
+      "تصحيح الألوان والدرجات",
+      "تسليم سريع بجودة عالية",
+    ],
+    color: "from-yellow-500 to-amber-500",
+  },
 ];
 
 /**
