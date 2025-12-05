@@ -92,6 +92,7 @@ export default function Home() {
                     service.id === "video-production" ? "/video-production" :
                     service.id === "voice-over" ? "/voice-artists" :
                     service.id === "content-writing" ? "/content-writing" :
+                    service.id === "editing-montage" ? "/editing-montage" :
                     "#contact"
                   }
                 >

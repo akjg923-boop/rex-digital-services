@@ -10,6 +10,7 @@ import ContentCreatorsPage from "./pages/ContentCreatorsPage";
 import VideoProductionPage from "./pages/VideoProductionPage";
 import VoiceArtistsPage from "./pages/VoiceArtistsPage";
 import ContentWritingPage from "./pages/ContentWritingPage";
+import EditingMontagePage from "./pages/EditingMontagePage";
 import AdminDashboard from "./pages/AdminDashboard";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/video-production" component={VideoProductionPage} />
       <Route path="/voice-artists" component={VoiceArtistsPage} />
       <Route path="/content-writing" component={ContentWritingPage} />
+      <Route path="/editing-montage" component={EditingMontagePage} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
